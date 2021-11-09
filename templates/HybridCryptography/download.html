@@ -6,7 +6,11 @@
 
 </head>
 <body>
+
+{% block content %}
 <h1> Click url for Download original file </h1>
-<a href="{% url 'HybridCryptography:download_file' %}">click here</a>
+<a href="{% url 'HybridCryptography:download_file' %}">download file </a><br/>
+<a href="{% url 'HybridCryptography:email_send' %}">send Email </a>
+{% endblock%}
 </body>
 </html>

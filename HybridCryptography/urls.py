@@ -11,6 +11,7 @@ urlpatterns = [
     path('download/',views.downloadView.as_view(),name="download"),
     path('success/', views.successView.as_view(), name="success"),
     path('download_file/',views.download_file,name="download_file"),
+    path('email_send/',views.email_send,name="email_send"),
 
 ]
 if settings.DEBUG:

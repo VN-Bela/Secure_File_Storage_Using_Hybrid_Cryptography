@@ -61,6 +61,7 @@ def decrypter():
   #  Key_2 = b'1234567887654321'  # DES 16 byte Key
    # Key_3 = b'Sixteen byte key'  # RC2 16 byte key
 
+    # Three algoritham Key Decryption
     file_in = open("Secret/encrypted_data.bin", "rb")
     private_key = RSA.import_key(open("Key/private.pem").read())
     enc_session_key, nonce, tag, ciphertext = [file_in.read(x) for x in (private_key.size_in_bytes(), 16, 16, -1)]
@@ -70,22 +71,24 @@ def decrypter():
     # Decrypt the data with the AES session key
     cipher_aes = AES.new(session_key, AES.MODE_EAX, nonce)
     data = cipher_aes.decrypt_and_verify(ciphertext, tag)
-    print("=========================")
+  #  print("=========================")
 
     # print(data.decode("utf-8"))
-
+    # Key Separation
     Key = data.decode("utf-8").split("\n")
-    print(Key)
-    print("=========================")
+   # print(Key)
+   # print("=========================")
+
     s1 = Key[0]
     s2 = Key[1][2:-1]
     s3 = Key[2][2:-1]
+    # Bytes Convertion
     Key_1 = bytes(s1, 'utf-8')
     Key_2 = bytes(s2, 'utf-8')
     Key_3 = bytes(s3, 'utf-8')
-    print(Key_1, "\n", type(Key_1))
-    print(Key_2, "\n", type(Key_2))
-    print(Key_3, "\n", type(Key_3))
+  #  print(Key_1, "\n", type(Key_1))
+   # print(Key_2, "\n", type(Key_2))
+   # print(Key_3, "\n", type(Key_3))
 
     print("=========================")
     for index in range(len(files)):

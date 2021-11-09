@@ -10,6 +10,8 @@ from . import combine
 from . import tools
 import mimetypes
 from django.http.response import HttpResponse
+from django.core.mail import send_mail, EmailMessage
+from django.conf import settings
 
 
 # Create your views here.
@@ -42,7 +44,6 @@ class uploadView(generic.ListView):
 class downloadView(generic.TemplateView):
     template_name = "HybridCryptography/download.html"
 
-
     def get(self, request):
         return render(request, self.template_name)
 
@@ -69,3 +70,13 @@ class successView(generic.TemplateView):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+def email_send(request):
+    # send_mail(subject='Demo Subject', message='Demo Message', from_email=settings.EMAIL_HOST_USER,
+    # recipient_list=[settings.RECIPIENT_ADDRESS])
+    msg = EmailMessage(subject='Demo Subject', body='Demo Message', from_email=settings.EMAIL_HOST_USER,
+                       to=[settings.RECIPIENT_ADDRESS])
+    msg.attach_file('Key/private.pem')
+    msg.send()
+    return render(request, "HybridCryptography/Email_send.html")
