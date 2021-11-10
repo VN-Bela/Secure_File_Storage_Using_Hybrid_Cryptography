@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'HybridCryptography.apps.HybridCryptographyConfig',
+    'UserApp.apps.UserappConfig'
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+AUTH_USER_MODEL = 'UserApp.User'
 # Email Configration
 
 # .env file create object
@@ -139,3 +142,8 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # password associated with abo
 
 # Custom Email
 RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+
+
+# Login Configuration
+LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL='/'
