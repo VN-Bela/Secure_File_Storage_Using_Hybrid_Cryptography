@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Key Information </title>
+</head>
+<body>
+{% block content%}
+<form method="post">
+    {% csrf_token %}
+    Email:<input type="email" name="recipient_email">
+    <a href="{% url 'HybridCryptography:email_send' %}"><button type="submit">Send</button></a>
+</form>
+
+{% endblock%}
+</body>
+</html>

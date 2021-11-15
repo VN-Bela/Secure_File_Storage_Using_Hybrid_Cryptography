@@ -141,9 +141,9 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')  # sender's email-id
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # password associated with above email-id
 
 # Custom Email
-RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+#RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
 
 
 # Login Configuration
-LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL='/HybridCryptography/'
+LOGOUT_REDIRECT_URL='/HybridCryptography/'

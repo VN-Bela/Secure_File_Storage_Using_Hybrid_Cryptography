@@ -29,7 +29,7 @@ class IndexView(generic.CreateView):
             fname = request.FILES['filename'].name
             divide.divider(fname)  # divide function call (to divide file)
             encrypt.encrypter()  # encrypt divided file
-            decrypt.decrypter()  # decrypt divide file
+        # decrypt.decrypter()  # decrypt divide file
 
         return redirect(reverse('HybridCryptography:upload'))
 
@@ -41,8 +41,27 @@ class uploadView(generic.ListView):
         return render(request, self.template_name)
 
 
+class KeyUploadView(generic.CreateView):
+    model = Document
+    template_name = "HybridCryptography/Key_Upload.html"
+    form_class = DocumentForm
+
+    #def get(self, request):
+        #return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        form = DocumentForm(request.POST or None, request.FILES)
+        if form.is_valid():
+            # DocForm = form.save(commit=False)
+            form.save()
+            fname = request.FILES['filename'].name
+            print(fname)
+            decrypt.decrypter(fname)
+        return render(request, "HybridCryptography/upload.html")
+
+
 class downloadView(generic.TemplateView):
-    template_name = "HybridCryptography/download.html"
+    template_name = "HybridCryptography/File_download.html"
 
     def get(self, request):
         return render(request, self.template_name)
@@ -72,11 +91,23 @@ class successView(generic.TemplateView):
         return render(request, self.template_name)
 
 
-def email_send(request):
+def email_send(recipient):
     # send_mail(subject='Demo Subject', message='Demo Message', from_email=settings.EMAIL_HOST_USER,
-    # recipient_list=[settings.RECIPIENT_ADDRESS])
+    print(recipient)
     msg = EmailMessage(subject='Demo Subject', body='Demo Message', from_email=settings.EMAIL_HOST_USER,
-                       to=[settings.RECIPIENT_ADDRESS])
+                       to=[recipient])
     msg.attach_file('Key/private.pem')
     msg.send()
-    return render(request, "HybridCryptography/Email_send.html")
+
+
+class KeySendView(generic.ListView):
+    template_name = "HybridCryptography/Key_Send.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get("recipient_email")
+        print(email)
+        email_send(email)
+        return render(request, "HybridCryptography/Email_send.html")

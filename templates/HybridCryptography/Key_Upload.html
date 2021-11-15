@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Key </title>
+
+</head>
+<body>
+
+{% block content %}
+<h1> Upload Private Key File  </h1>
+<form method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+  {{ form.as_p }}
+  <a href="{% url 'HybridCryptography:Key_Upload' %}"><button type="submit">Upload</button></a>
+</form>
+{% endblock%}
+</body>
+</html>

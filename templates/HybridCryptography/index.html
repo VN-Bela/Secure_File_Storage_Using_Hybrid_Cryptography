@@ -12,7 +12,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Upload</button>
-    <a href="{% url 'HybridCryptography:download' %}">Download</a>
+    <a href="{% url 'HybridCryptography:key_send' %}">Download</a>
   </form>
 
 {% endblock %}
